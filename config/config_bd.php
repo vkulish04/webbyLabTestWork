@@ -1,7 +1,7 @@
 <?php
 return [
-    'username' => '',
-    'password' => '',
-    'dbname' => '',
+    'username' => 'root',
+    'password' => 'root',
+    'dbname' => 'webbyLab',
     'hostname' => 'localhost'
 ];
