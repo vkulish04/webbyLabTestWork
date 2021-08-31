@@ -3,7 +3,7 @@
 
 class Db
 {
-    public function conect(){
+    public static function conect(){
         $config_db = include 'config/config_bd.php';
 
         $dsn = "mysql:host={$config_db['hostname']};dbname={$config_db['dbname']}";
