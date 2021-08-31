@@ -9,14 +9,22 @@ class Controller_Main extends Controller
         $this->view = new View();
     }
 
-    function action_index()
+    public function action_index()
     {
 
         $data = $this->model->getFilms();
-echo "<pre>";
-print_r($data);
-echo "<pre>";
-die();
-        $this->view->render('main_view.php', 'template_view.php');
+
+        $this->view->render('main_view.php', 'template_view.php', $data);
     }
+    public function action_film_deleted(){
+
+        $id = $_GET['id'];
+        $this->model->deletedFilm($id);
+        return $this->action_index();
+    }
+    public function action_add_film(){
+
+        return 1;
+    }
+
 }

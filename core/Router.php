@@ -15,8 +15,13 @@ class Router
             $controller_name = $rout[1];
         }
         if( $rout[2]){
-            $action_name = $rout[2];
+            $action_url =  explode( "?", $rout[2]);
+            $action_name = $action_url[0];
         }
+//        echo "<pre>";
+//        print_r($action_name);
+//        echo "<pre>";
+//        die();
 
         $model_name = 'Model_' . $controller_name;
         $controller_name = 'Controller_' . $controller_name;
@@ -53,10 +58,7 @@ class Router
         if(method_exists($controller, $action)){
 
             $controller->$action();
-        }else{
-            Router::Error404();
         }
-
     }
 
    static  function Error404(){
