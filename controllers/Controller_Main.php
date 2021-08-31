@@ -14,7 +14,7 @@ class Controller_Main extends Controller
 
         $data = $this->model->getFilms();
 
-        $this->view->render('main_view.php', 'template_view.php', $data);
+        return $this->view->render('main_view.php', 'template_view.php', $data);
     }
     public function action_film_deleted(){
 
@@ -24,7 +24,14 @@ class Controller_Main extends Controller
     }
     public function action_add_film(){
 
-        return 1;
+
+        if($_POST){
+            echo "<pre>";
+            print_r($_POST['name']);
+            echo "<pre>";
+            die();
+        }
+        return $this->view->render('add_view.php', 'template_view.php');
     }
 
 }

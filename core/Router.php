@@ -15,7 +15,7 @@ class Router
             $controller_name = $rout[1];
         }
         if( $rout[2]){
-            $action_url =  explode( "?", $rout[2]);
+            $action_url =  explode( "?", $rout[2]); // отрезаем гет параметри
             $action_name = $action_url[0];
         }
 //        echo "<pre>";
