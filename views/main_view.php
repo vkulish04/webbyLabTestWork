@@ -8,11 +8,10 @@
         <ul class="list-group">
             <?php foreach ($data as $el){?>
             <li class="list-group-item d-flex justify-content-between align-items-center">
-                <?= $el['name']?>
-                <a href="/main/film_deleted?id=<?= $el['id_film']?>" class="btn btn-danger">x</a>
+                <?= $el->name?>
+                <a href="/main/film_deleted?id=<?= $el->id_film?>" class="btn btn-danger">x</a>
             </li>
             <?php }?>
         </ul>
     </div>
-    div
 </div>

@@ -12,7 +12,14 @@ class Controller_Main extends Controller
     public function action_index()
     {
 
-        $data = $this->model->getFilms();
+
+        if($_GET['search_id'] && $_GET['search_data']){
+
+        }else {
+
+            $data = $this->model->getFilms();
+        }
+
 
         return $this->view->render('main_view.php', 'template_view.php', $data);
     }
@@ -26,12 +33,28 @@ class Controller_Main extends Controller
 
 
         if($_POST){
-            echo "<pre>";
-            print_r($_POST['name']);
-            echo "<pre>";
-            die();
+
+            $this->model->name = $_POST['name'];
+            $this->model->format = $_POST['format'];
+            $this->model->list_authors = $_POST['list_authors'];
+            $this->model->graduation_year = $_POST['graduation_year'];
+
+
+            $this->model->addFilm();
         }
         return $this->view->render('add_view.php', 'template_view.php');
     }
+
+    public function action_detail(){
+
+        $data =  $this->model->getById(2);
+        echo "<pre>";
+        print_r($data->name);
+        echo "<pre>";
+        die();
+
+        return $this->view->render('detail_view.php', 'template_view.php',$data);
+    }
+
 
 }

@@ -18,10 +18,6 @@ class Router
             $action_url =  explode( "?", $rout[2]); // отрезаем гет параметри
             $action_name = $action_url[0];
         }
-//        echo "<pre>";
-//        print_r($action_name);
-//        echo "<pre>";
-//        die();
 
         $model_name = 'Model_' . $controller_name;
         $controller_name = 'Controller_' . $controller_name;
