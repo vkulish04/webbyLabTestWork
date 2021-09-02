@@ -18,7 +18,7 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <a class="nav-link" href="/main/add_film/">Добавить фильм</a>
-                    <a class="nav-link" href="#">Импорт фильмов</a>
+                    <a class="nav-link" href="/main/import/">Импорт фильмов</a>
 
                 </div>
             </div>

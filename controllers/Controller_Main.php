@@ -56,5 +56,40 @@ class Controller_Main extends Controller
         return $this->view->render('detail_view.php', 'template_view.php',$data);
     }
 
+    public function action_search(){
+
+         $this->model->search("name", "Casablanca");
+
+    }
+
+    public function action_import(){
+        $import_data = array();
+
+        if($_FILES){
+
+            $res = file_get_contents($_FILES['file_import']['tmp_name']);
+            //Разбиваем на массив использую
+            //как разделитель символы переноса строки
+            $lines = explode("\r\n", $res);
+            $import_data = array_diff($lines, array(''));
+            $import_data = array_chunk($import_data, 4);
+            
+            echo "<pre>";
+            print_r($import_data);
+            echo "<pre>";
+            die();
+
+            foreach ($lines as $key=>$val)
+            {
+                if($val) {
+                    echo "Строка $key:" . $val . "<br/>";
+                }
+            }
+        }
+
+        return $this->view->render('import_view.php', 'template_view.php');
+
+    }
+
 
 }

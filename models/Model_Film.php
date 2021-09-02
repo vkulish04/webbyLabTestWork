@@ -41,8 +41,6 @@ class Model_Film extends Controller
 
     public function addFilm(){
 
-
-
         $db = Db::conect();
         $param = [
             'name' => $this->name,
@@ -76,13 +74,18 @@ class Model_Film extends Controller
     }
 
     public function search($search_id, $search_data){
+        $param = [
+            'collum' => $search_id,
+            'search_name' => $search_data,
+        ];
 
         $db = Db::conect();
-        $query = "SELECT * FROM categories WHERE `" . $search_id ."` LIKE ?";
-        $params = ["%$search_data%"];
+        $query = "SELECT * FROM film WHERE `:collum` = :search_name";
+        $params = ["%$search_id", "%$search_data%"];
         $stmt = $db->prepare($query);
-        $stmt->execute($params);
+        $stmt->execute($param);
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
         $i = 1;
         foreach ($data as $category){
             echo $i++ . '. ' . $category['name'].'<br>';
