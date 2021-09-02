@@ -14,6 +14,12 @@ class Controller_Main extends Controller
 
 
         if($_GET['search_id'] && $_GET['search_data']){
+            $data = $this->model->search($_GET['search_id'], $_GET['search_data']);
+
+            echo "<pre>";
+            print_r($data);
+            echo "<pre>";
+            die();
 
         }else {
 
@@ -47,12 +53,9 @@ class Controller_Main extends Controller
 
     public function action_detail(){
 
-        $data =  $this->model->getById(2);
-        echo "<pre>";
-        print_r($data->name);
-        echo "<pre>";
-        die();
-
+        if($_GET['id']){
+            $data =  $this->model->getById($_GET['id']);
+        }
         return $this->view->render('detail_view.php', 'template_view.php',$data);
     }
 
@@ -73,18 +76,14 @@ class Controller_Main extends Controller
             $lines = explode("\r\n", $res);
             $import_data = array_diff($lines, array(''));
             $import_data = array_chunk($import_data, 4);
-            
-            echo "<pre>";
-            print_r($import_data);
-            echo "<pre>";
-            die();
-
-            foreach ($lines as $key=>$val)
-            {
-                if($val) {
-                    echo "Строка $key:" . $val . "<br/>";
-                }
+            foreach ($import_data as $datum){
+                $this->model->name = str_replace('Title: ', "", $datum[0]);
+                $this->model->format = str_replace('Format: ', "", $datum[2]);
+                $this->model->graduation_year = str_replace('Release Year: ', "", $datum[1]);
+                $this->model->list_authors = str_replace('Stars: ', "", $datum[3]);
+                $this->model->addFilm();
             }
+            return $this->action_index();
         }
 
         return $this->view->render('import_view.php', 'template_view.php');
