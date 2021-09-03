@@ -74,7 +74,7 @@ class Controller_Main extends Controller
                 $this->model->addFilm();
             }
             header("HTTP/1.1 301 Moved Permanently");
-            header("Location: http://testwork/");
+            header("Location: /");
             exit();
         }
         return $this->view->render('import_view.php', 'template_view.php');
