@@ -1,4 +1,4 @@
-# WabbyLab Test
+# WebbyLab Test
 
 
 Тестовое задания на стажировку
