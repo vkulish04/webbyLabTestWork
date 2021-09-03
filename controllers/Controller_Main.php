@@ -14,7 +14,6 @@ class Controller_Main extends Controller
         $this->model->tableExists('film');
 
         if($_GET['search_id'] && $_GET['search_data']){
-            // порблем
             $data = $this->model->search($_GET['search_id'], $_GET['search_data']);
         }else {
             $data = $this->model->getFilms();
