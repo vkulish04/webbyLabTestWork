@@ -3,6 +3,8 @@
 
 class Db
 {
+
+    //написать создания таблици
     public static function conect(){
         $config_db = include 'config/config_bd.php';
 
@@ -10,6 +12,11 @@ class Db
         $db = new PDO($dsn, $config_db['username'], $config_db['password']);
         //кодировка
         $db->exec("set names utf8");
+
+
+
+
+
         return $db;
     }
 

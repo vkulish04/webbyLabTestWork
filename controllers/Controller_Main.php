@@ -11,48 +11,47 @@ class Controller_Main extends Controller
 
     public function action_index()
     {
-
+        $this->model->tableExists('film');
 
         if($_GET['search_id'] && $_GET['search_data']){
+            // порблем
             $data = $this->model->search($_GET['search_id'], $_GET['search_data']);
-
             echo "<pre>";
             print_r($data);
             echo "<pre>";
             die();
-
         }else {
-
             $data = $this->model->getFilms();
         }
-
-
         return $this->view->render('main_view.php', 'template_view.php', $data);
     }
     public function action_film_deleted(){
-
-        $id = $_GET['id'];
-        $this->model->deletedFilm($id);
+        if($_GET['id']) {
+            $id = $_GET['id'];
+           $res = $this->model->deletedFilm($id);
+            if($res == true){
+                return $this->action_index();
+            }
+        }
         return $this->action_index();
     }
     public function action_add_film(){
 
 
-        if($_POST){
-
+        if($_POST['name'] && $_POST['format'] && $_POST['list_authors'] && $_POST['graduation_year']){
             $this->model->name = $_POST['name'];
             $this->model->format = $_POST['format'];
             $this->model->list_authors = $_POST['list_authors'];
             $this->model->graduation_year = $_POST['graduation_year'];
-
-
             $this->model->addFilm();
+            return $this->action_index();
+        }else{
+            return $this->view->render('add_view.php', 'template_view.php');
         }
         return $this->view->render('add_view.php', 'template_view.php');
     }
 
     public function action_detail(){
-
         if($_GET['id']){
             $data =  $this->model->getById($_GET['id']);
         }
@@ -60,19 +59,18 @@ class Controller_Main extends Controller
     }
 
     public function action_search(){
-
          $this->model->search("name", "Casablanca");
-
     }
 
+
+    // считуем построчно дание с txt
+    // вирезаем пустие строки
+    // груперуем по 4 елемента
+    // обрезаем  начало
+    // добавляем в бд
     public function action_import(){
-        $import_data = array();
-
         if($_FILES){
-
             $res = file_get_contents($_FILES['file_import']['tmp_name']);
-            //Разбиваем на массив использую
-            //как разделитель символы переноса строки
             $lines = explode("\r\n", $res);
             $import_data = array_diff($lines, array(''));
             $import_data = array_chunk($import_data, 4);
@@ -83,9 +81,10 @@ class Controller_Main extends Controller
                 $this->model->list_authors = str_replace('Stars: ', "", $datum[3]);
                 $this->model->addFilm();
             }
-            return $this->action_index();
+            header("HTTP/1.1 301 Moved Permanently");
+            header("Location: http://testwork/");
+            exit();
         }
-
         return $this->view->render('import_view.php', 'template_view.php');
 
     }
