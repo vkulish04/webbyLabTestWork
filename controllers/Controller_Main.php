@@ -16,10 +16,6 @@ class Controller_Main extends Controller
         if($_GET['search_id'] && $_GET['search_data']){
             // порблем
             $data = $this->model->search($_GET['search_id'], $_GET['search_data']);
-            echo "<pre>";
-            print_r($data);
-            echo "<pre>";
-            die();
         }else {
             $data = $this->model->getFilms();
         }
@@ -56,10 +52,6 @@ class Controller_Main extends Controller
             $data =  $this->model->getById($_GET['id']);
         }
         return $this->view->render('detail_view.php', 'template_view.php',$data);
-    }
-
-    public function action_search(){
-         $this->model->search("name", "Casablanca");
     }
 
 

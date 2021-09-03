@@ -13,21 +13,22 @@
                 </li>
             <?php } ?>
         </ul>
-
-        <div class="col-6">
-            <form action="/main/index   " method="get">
-                <div class="form-group col-md-6">
-                    <label for="inputState">Тып поиска</label>
-                    <select id="inputState" class="form-control" name="search_id">
-                        <option value="name">По названию</option>
-                        <option value="list_authors">По имени актера</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="exampleFormControlInput1">Названия фильма</label>
-                    <input type="text" class="form-control" name="search_data">
-                </div>
-                <button type="submit" class="btn btn-success">Поиск</button>
-            </form>
-        </div>
     </div>
+
+    <div class="col-6">
+        <form action="/main/index   " method="get">
+            <div class="form-group col-md-6">
+                <label for="inputState">Тып поиска</label>
+                <select id="inputState" class="form-control" name="search_id">
+                    <option value="name">По названию</option>
+                    <option value="list_authors">По имени актера</option>
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="exampleFormControlInput1">Названия фильма</label>
+                <input type="text" class="form-control" name="search_data">
+            </div>
+            <button type="submit" class="btn btn-success">Поиск</button>
+        </form>
+    </div>
+</div>

@@ -114,22 +114,21 @@ list_authors VARCHAR(255)
 
     public function search($search_id, $search_data)
     {
-        $param = [
-            'collum' => $search_id,
-            'search_name' => $search_data,
-        ];
-
         $db = Db::conect();
-        $query = "SELECT * FROM film WHERE `:collum` = :search_name";
-        $params = ["%$search_id", "%$search_data%"];
-        $stmt = $db->prepare($query);
-        $stmt->execute($param);
+        if($search_id == "name"){
+            $sql = "SELECT * FROM film WHERE name LIKE ?";
+        }else if($search_id == "list_authors"){
+            $sql = "SELECT * FROM film WHERE list_authors LIKE ?";
+        }
+        $params = ["%$search_data%"];
+        $stmt = $db->prepare($sql);
+        $stmt->execute($params);
         $data = array();
         $i = 0;
         while ($row = $stmt->fetch()) {
             $data [] = new Model_Film($row['id_film'], $row['name'], $row['format'], $row['graduation_year'], $row['list_authors']);
             $i++;
         }
-        die();
+      return $data;
     }
 }
