@@ -33,7 +33,7 @@
             </div>
             <div class="form-group">
                 <label>Список актеров </label>
-                <textarea class="form-control" name="list_authors"  rows="3"><?= $data['graduation_year']?></textarea>
+                <textarea class="form-control" name="list_authors"  rows="3"><?= $data['list_authors']?></textarea>
             </div>
             <button type="submit" class="btn btn-success">Сохранить</button>
         </form>
