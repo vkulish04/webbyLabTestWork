@@ -3,6 +3,15 @@
         Добавить фільм
     </h1>
 </div>
+<?php if ($data['check'] == false){ ?>
+<div class="row">
+   <span style="color: red"> <?= $data['text']?></span>
+</div>
+<?php } else{?>
+    <div class="row">
+        <?= $data['text']?>
+    </div>
+<?php }?>
 <div class="row">
     <div class="col-4">
         <form action="/main/add_film/" method="post">
@@ -16,7 +25,11 @@
             </div>
             <div class="form-group">
                 <label>Формат</label>
-                <input type="text" class="form-control" name="format">
+                <select class="form-control" name="format">
+                    <option value="VHS">VHS</option>
+                    <option value="DVD">DVD</option>
+                    <option value="Blu-Ray">Blu-Ray</option>
+                </select>
             </div>
             <div class="form-group">
                 <label>Список актеров </label>
