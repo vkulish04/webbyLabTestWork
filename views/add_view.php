@@ -5,11 +5,11 @@
 </div>
 <?php if ($data['check'] == false){ ?>
 <div class="row">
-   <span style="color: red"> <?= $data['text']?></span>
+   <span style="color: red; font-size: x-large"> <?= $data['text']?></span>
 </div>
 <?php } else{?>
     <div class="row">
-        <?= $data['text']?>
+       <span style="font-size: x-large""> <?= $data['text']?></span>
     </div>
 <?php }?>
 <div class="row">
@@ -17,11 +17,11 @@
         <form action="/main/add_film/" method="post">
             <div class="form-group">
                 <label>Названия фильма</label>
-                <input type="text" class="form-control" name="name">
+                <input type="text" class="form-control" name="name" value="<?= $data['name']?>">
             </div>
             <div class="form-group">
                 <label>Год выпуска</label>
-                <input type="text" class="form-control" name="graduation_year">
+                <input type="text" class="form-control" name="graduation_year" value="<?= $data['graduation_year']?>">
             </div>
             <div class="form-group">
                 <label>Формат</label>
@@ -33,7 +33,7 @@
             </div>
             <div class="form-group">
                 <label>Список актеров </label>
-                <textarea class="form-control" name="list_authors"  rows="3"></textarea>
+                <textarea class="form-control" name="list_authors"  rows="3"><?= $data['graduation_year']?></textarea>
             </div>
             <button type="submit" class="btn btn-success">Сохранить</button>
         </form>

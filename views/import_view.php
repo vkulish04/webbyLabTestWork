@@ -14,8 +14,8 @@
         </form>
     </div>
     <div class="col-4">
-        <span>Добавлено нових записей:<?= $data['executed']?></span><br>
-        <span>Недобавлено записей:<?= $data['notexecude']?></span><br>
+        <span>Добавлено нових записей: <?= $data['executed']?></span><br>
+        <span>Недобавлено записей: <?= $data['notexecude']?></span><br>
 
     </div>
 </div>

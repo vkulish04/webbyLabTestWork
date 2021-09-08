@@ -45,6 +45,7 @@ class Controller_Main extends Controller
                     break;
             }
             $data['search_data'] = $_GET['search_data'];
+            $data['pagination_disable'] = true;
         } else {
             $data['film'] = $this->model->getFilms($page_id);
         }
@@ -69,6 +70,10 @@ class Controller_Main extends Controller
         $data['check'] = true;
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $data['name'] = $_POST['name'];
+            $data['format'] = $_POST['format'];
+            $data['list_authors'] = $_POST['list_authors'];
+            $data['graduation_year'] = $_POST['graduation_year'];
             if (trim($_POST['name']) !== "" && trim($_POST['format']) != "" && trim($_POST['list_authors']) != "" && trim($_POST['graduation_year']) != "") {
                 $this->model->name = $_POST['name'];
                 $this->model->format = $_POST['format'];
@@ -76,18 +81,22 @@ class Controller_Main extends Controller
                 $this->model->graduation_year = $_POST['graduation_year'];
                 $res = $this->model->addFilm();
                 if ($res) {
-                    $data['text'] = "Данные успешо добалени !!";
+                    $data['text'] = "Данные успешно добавлены !!";
                     $data['check'] = true;
                 }else{
-                    $data['name'] = $this->model->name;
-                    $data['format'] = $this->model->format;
-                    $data['list_authors'] = $this->model->list_authors;
 
-                    $data['text'] = "Ошибки валидации";
+                    $data['text'] = "Данные не добавление! Ошибки валидации !";
                     $data['check'] = false;
+
                 }
             }
+            else{
+
+                $data['text'] = "Заполните пустые поля";
+                $data['check'] = false;
+            }
         }
+
         return $this->view->render('add_view.php', 'template_view.php', $data);
     }
 
@@ -98,7 +107,7 @@ class Controller_Main extends Controller
         }
         return $this->view->render('detail_view.php', 'template_view.php', $data);
     }
-    
+
 
     // считуем построчно дание с txt
     // вирезаем пустие строки
